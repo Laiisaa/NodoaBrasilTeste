@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nódoa Brasil</title>
+  <meta name="description" content="Nódoa Brasil — revista digital de cultura, música, atualidades e curiosidades brasileiras." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --creme:     #eddbba;
+      --verde:     #303c17;
+      --laranja:   #ec6125;
+      --vinho:     #832519;
+      --mostarda:  #e2980b;
+      --roxo:      #54328e;
+      --card-bg:   #f5ead4;
+      --creme-esc: #dfc99e;
+
+      --bg:   var(--creme);
+      --text: var(--verde);
+
+      --font-display: 'DM Serif Display', serif;
+      --font-title:   'Playfair Display', serif;
+      --font-body:    'Lora', serif;
+    }
+
+    [data-theme="dark"] {
+      --bg:      #1a1f0e;
+      --text:    #eddbba;
+      --card-bg: #252b14;
+      --creme-esc: #2e3518;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--verde);
+      color: var(--creme);
+      text-align: center;
+      padding: 7px 20px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    [data-theme="dark"] .top-bar { background: #0d1008; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--bg);
+      border-bottom: 2px solid var(--verde);
+      padding: 0 40px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo svg { width: 42px; height: 42px; flex-shrink: 0; }
+
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    .nav-logo-text span { color: var(--laranja); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--laranja);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--laranja); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--verde);
+      border-radius: 24px;
+      padding: 7px 16px;
+      transition: border-color 0.2s;
+    }
+    .search-wrap:focus-within { border-color: var(--laranja); }
+    .search-wrap svg { width: 15px; height: 15px; stroke: var(--text); flex-shrink: 0; }
+    .search-wrap input {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text);
+      width: 150px;
+    }
+    .search-wrap input::placeholder { color: #aaa; }
+
+    .theme-btn {
+      background: none;
+      border: 1.5px solid var(--text);
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s;
+    }
+    .theme-btn:hover { background: var(--verde); color: var(--creme); border-color: var(--verde); }
+    [data-theme="dark"] .theme-btn:hover { background: var(--creme); color: var(--verde); border-color: var(--creme); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      border-bottom: 2px solid var(--verde);
+      min-height: 500px;
+    }
+
+    .hero-content {
+      padding: 64px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 2px solid var(--verde);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--laranja);
+      margin-bottom: 22px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--laranja);
+      display: block;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(26px, 3.2vw, 44px);
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 20px;
+    }
+
+    .hero-excerpt {
+      font-size: 15px;
+      opacity: 0.72;
+      max-width: 460px;
+      margin-bottom: 10px;
+    }
+
+    .hero-meta {
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: 32px;
+    }
+
+    .btn-ler {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--laranja);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      align-self: flex-start;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-ler svg { width: 15px; height: 15px; stroke: #fff; transition: transform 0.2s; }
+    .btn-ler:hover { background: var(--vinho); transform: translateY(-2px); }
+    .btn-ler:hover svg { transform: translateX(4px); }
+
+    .hero-image {
+      background: var(--verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 380px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--creme);
+      opacity: 0.25;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+    .hero-placeholder svg { width: 44px; height: 44px; stroke: currentColor; }
+
+    /* ── CATEGORIAS ── */
+    .categorias {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 2px solid var(--verde);
+    }
+
+    .cat-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 26px 24px;
+      border-right: 2px solid var(--verde);
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .cat-item:last-child { border-right: none; }
+    .cat-item:hover { background: var(--verde); color: var(--creme); }
+    .cat-item:hover .cat-icon { background: var(--laranja); }
+
+    .cat-icon {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--laranja);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .cat-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; }
+
+    .cat-nome {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+    }
+    .cat-qtd { font-size: 11px; opacity: 0.5; }
+
+    /* ── GRID MATÉRIAS ── */
+    .materias-sec {
+      padding: 56px 40px;
+      border-bottom: 2px solid var(--verde);
+    }
+
+    .sec-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 36px;
+    }
+    .sec-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+    }
+    .sec-title span { color: var(--laranja); }
+    .sec-ver {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--laranja);
+      border-bottom: 1px solid var(--laranja);
+      padding-bottom: 2px;
+    }
+    .sec-ver:hover { color: var(--vinho); border-color: var(--vinho); }
+
+    .grid-materias {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--verde);
+      border: 2px solid var(--verde);
+    }
+
+    .card {
+      background: var(--bg);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: background 0.2s;
+    }
+    .card:hover { background: var(--card-bg); }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--creme-esc);
+      border: 1.5px solid rgba(48,60,23,0.2);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    [data-theme="dark"] .card-img { border-color: #3a4520; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-img-ph { opacity: 0.18; }
+    .card-img-ph svg { width: 26px; height: 26px; stroke: var(--text); }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      align-self: flex-start;
+    }
+    .tag-op  { background: var(--laranja);  color: #fff; }
+    .tag-at  { background: var(--vinho);    color: #fff; }
+    .tag-cu  { background: var(--mostarda); color: var(--verde); }
+    .tag-mu  { background: var(--roxo);     color: #fff; }
+
+    .card-titulo {
+      font-family: var(--font-title);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .card-exc {
+      font-size: 13px;
+      opacity: 0.65;
+      line-height: 1.65;
+    }
+    .card-meta {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.38;
+      margin-top: auto;
+    }
+
+    /* ── SOBRE ── */
+    .sobre-sec {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid var(--verde);
+    }
+
+    .sobre-content {
+      padding: 60px 52px;
+      border-right: 2px solid var(--verde);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .sobre-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--laranja);
+    }
+
+    .sobre-titulo {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.8vw, 36px);
+      line-height: 1.22;
+    }
+
+    .sobre-texto {
+      font-size: 15px;
+      line-height: 1.8;
+      opacity: 0.72;
+    }
+    .sobre-texto em { font-style: italic; color: var(--vinho); opacity: 1; }
+
+    .btn-sobre {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 2px solid var(--verde);
+      color: var(--text);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      align-self: flex-start;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-sobre:hover { background: var(--verde); color: var(--creme); }
+
+    .sobre-visual {
+      background: var(--verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .caju-grande { width: 130px; }
+
+    .sobre-frase {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--creme);
+      text-align: center;
+      max-width: 280px;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+
+    /* ── INSTAGRAM ── */
+    .insta-sec {
+      background: var(--laranja);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--verde);
+    }
+
+    .insta-esq {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .insta-icone {
+      width: 52px; height: 52px;
+      background: #fff;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .insta-icone svg { width: 26px; height: 26px; stroke: var(--laranja); fill: none; }
+
+    .insta-titulo {
+      font-family: var(--font-title);
+      font-size: 19px;
+      color: #fff;
+      display: block;
+    }
+    .insta-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .btn-insta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: var(--laranja);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-insta svg { width: 15px; height: 15px; stroke: currentColor; }
+    .btn-insta:hover { background: var(--verde); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--verde);
+      color: var(--creme);
+      padding: 52px 40px 24px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(237,219,186,0.18);
+      margin-bottom: 24px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+    .footer-logo span { color: var(--laranja); }
+
+    .footer-desc {
+      font-size: 13px;
+      color: rgba(237,219,186,0.55);
+      line-height: 1.75;
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--laranja);
+      margin-bottom: 16px;
+      font-weight: normal;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { font-size: 13px; color: rgba(237,219,186,0.55); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--creme); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: rgba(237,219,186,0.3);
+      letter-spacing: 1px;
+    }
+
+    /* ── ANIMAÇÕES ── */
+    .fadein {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: up 0.55s ease forwards;
+    }
+    .fadein:nth-child(2) { animation-delay: 0.1s; }
+    .fadein:nth-child(3) { animation-delay: 0.2s; }
+    .fadein:nth-child(4) { animation-delay: 0.3s; }
+    .fadein:nth-child(5) { animation-delay: 0.4s; }
+    .fadein:nth-child(6) { animation-delay: 0.5s; }
+
+    @keyframes up { to { opacity:1; transform: translateY(0); } }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 860px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-content { border-right: none; border-bottom: 2px solid var(--verde); padding: 40px 24px; }
+      .hero-image { min-height: 260px; }
+      .categorias { grid-template-columns: 1fr 1fr; }
+      .cat-item:nth-child(2) { border-right: none; }
+      .cat-item:nth-child(3) { border-top: 2px solid var(--verde); }
+      .cat-item:nth-child(4) { border-top: 2px solid var(--verde); border-right: none; }
+      .materias-sec { padding: 40px 20px; }
+      .grid-materias { grid-template-columns: 1fr; }
+      .sobre-sec { grid-template-columns: 1fr; }
+      .sobre-content { border-right: none; border-bottom: 2px solid var(--verde); padding: 40px 24px; }
+      .sobre-visual { padding: 40px; }
+      .insta-sec { flex-direction: column; gap: 20px; text-align: center; }
+      .insta-esq { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">✦ Revista digital de cultura brasileira ✦ Nova matéria toda semana ✦</div>
+
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <a href="index.html" class="nav-logo" aria-label="Nódoa Brasil — página inicial">
+      <img src="logo-caju.svg" alt="" aria-hidden="true" width="44" height="44" style="border-radius:7px; flex-shrink:0;" />
+      <span class="nav-logo-text">Nódoa <span>Brasil</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="categorias.html">Categorias</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="equipe.html">Equipe</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <div class="search-wrap" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" placeholder="Buscar matérias..." aria-label="Buscar matérias" id="searchInput" />
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Alternar modo claro e escuro">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" width="17" height="17" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Matéria em destaque">
+      <div class="hero-content">
+        <span class="hero-tag">Destaque da semana</span>
+        <h1 class="hero-title">A mancha que ficou: memória, corpo e pertencimento no Brasil contemporâneo</h1>
+        <p class="hero-excerpt">Uma investigação sobre o que carregamos na pele e no imaginário — e por que algumas marcas se recusam a desaparecer.</p>
+        <p class="hero-meta">Por Editoria Nódoa &nbsp;·&nbsp; Atualidades &nbsp;·&nbsp; 14 min de leitura</p>
+        <a href="materia.html" class="btn-ler">
+          Ler matéria
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-image" aria-label="Imagem da matéria destaque">
+        <!--
+          Para adicionar sua imagem, substitua o bloco abaixo por:
+          <img src="imagens/destaque.jpg" alt="Descrição da imagem" />
+        -->
+        <div class="hero-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Imagem de capa</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIAS -->
+    <nav class="categorias" aria-label="Categorias">
+      <a href="categoria-opiniao.html" class="cat-item">
+        <div class="cat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div>
+          <span class="cat-nome">Opinião</span>
+          <span class="cat-qtd">12 matérias</span>
+        </div>
+      </a>
+      <a href="categoria-atualidades.html" class="cat-item">
+        <div class="cat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div>
+          <span class="cat-nome">Atualidades</span>
+          <span class="cat-qtd">8 matérias</span>
+        </div>
+      </a>
+      <a href="categoria-curiosidades.html" class="cat-item">
+        <div class="cat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+        </div>
+        <div>
+          <span class="cat-nome">Curiosidades</span>
+          <span class="cat-qtd">15 matérias</span>
+        </div>
+      </a>
+      <a href="categoria-musica.html" class="cat-item">
+        <div class="cat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div>
+          <span class="cat-nome">Música</span>
+          <span class="cat-qtd">10 matérias</span>
+        </div>
+      </a>
+    </nav>
+
+    <!-- GRID DE MATÉRIAS -->
+    <section class="materias-sec" aria-label="Últimas matérias">
+      <div class="sec-header">
+        <h2 class="sec-title">Últimas <span>matérias</span></h2>
+        <a href="arquivo.html" class="sec-ver">Ver todas →</a>
+      </div>
+      <div class="grid-materias">
+
+        <a href="materia.html" class="card fadein">
+          <div class="card-img" aria-hidden="true">
+            <!-- <img src="imagens/zines.jpg" alt="Zines espalhadas sobre mesa" /> -->
+            <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <span class="tag tag-cu">Curiosidades</span>
+          <h3 class="card-titulo">Zines brasileiras e a estética do imperfeito</h3>
+          <p class="card-exc">Como a autopublicação independente virou linguagem cultural de resistência no Brasil.</p>
+          <p class="card-meta">Jun 2026 · 8 min</p>
+        </a>
+
+        <a href="materia.html" class="card fadein">
+          <div class="card-img" aria-hidden="true">
+            <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <span class="tag tag-op">Opinião</span>
+          <h3 class="card-titulo">Cabelo como política: narrativas que resistem</h3>
+          <p class="card-exc">O que os cachos, tranças e cortes naturais dizem sobre identidade e pertencimento no Brasil.</p>
+          <p class="card-meta">Mai 2026 · 11 min</p>
+        </a>
+
+        <a href="materia.html" class="card fadein">
+          <div class="card-img" aria-hidden="true">
+            <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <span class="tag tag-mu">Música</span>
+          <h3 class="card-titulo">Baião de dois: a fusão que saiu do sertão e chegou ao mundo</h3>
+          <p class="card-exc">A história de um ritmo que atravessou décadas e continua reinventando a música brasileira.</p>
+          <p class="card-meta">Mai 2026 · 9 min</p>
+        </a>
+
+        <a href="materia.html" class="card fadein">
+          <div class="card-img" aria-hidden="true">
+            <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <span class="tag tag-at">Atualidades</span>
+          <h3 class="card-titulo">O que as fotografias de família não mostram</h3>
+          <p class="card-exc">Lacunas e ausências nas histórias que contamos sobre nós mesmos.</p>
+          <p class="card-meta">Abr 2026 · 7 min</p>
+        </a>
+
+        <a href="materia.html" class="card fadein">
+          <div class="card-img" aria-hidden="true">
+            <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <span class="tag tag-cu">Curiosidades</span>
+          <h3 class="card-titulo">Tradição e ruptura no artesanato do Nordeste</h3>
+          <p class="card-exc">Artesãs jovens reinterpretam formas centenárias com materiais contemporâneos.</p>
+          <p class="card-meta">Abr 2026 · 6 min</p>
+        </a>
+
+        <a href="materia.html" class="card fadein">
+          <div class="card-img" aria-hidden="true">
+            <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          </div>
+          <span class="tag tag-op">Opinião</span>
+          <h3 class="card-titulo">Por que ainda precisamos falar sobre diversidade cultural?</h3>
+          <p class="card-exc">Reflexão sobre representação, visibilidade e os espaços que ainda precisamos ocupar.</p>
+          <p class="card-meta">Mar 2026 · 10 min</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="sobre-sec" aria-label="Sobre a Nódoa Brasil">
+      <div class="sobre-content">
+        <span class="sobre-label">O que é a Nódoa Brasil</span>
+        <h2 class="sobre-titulo">A marca que o líquido do caju deixa por onde passa</h2>
+        <p class="sobre-texto">
+          <em>Nódoa:</em> sinal deixado por um corpo ou substância que suja; mancha. Resistente, marcante, difícil de sair — e consequentemente difícil de ser esquecida.
+        </p>
+        <p class="sobre-texto">
+          É assim que queremos ser para você: fixos na sua mente, melhorando profundamente seu dia a dia com gotas de cultura, comunicação e vontade de fazer a diferença.
+        </p>
+        <a href="sobre.html" class="btn-sobre">Conheça a revista →</a>
+      </div>
+      <div class="sobre-visual" aria-hidden="true">
+        <img src="logo-completo.svg" alt="Logo Nódoa Brasil" style="width:200px; max-width:100%;" />
+        <p class="sobre-frase">"No preso caso, nos inspiramos na pele do caju."</p>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section class="insta-sec" aria-label="Instagram da Nódoa Brasil">
+      <div class="insta-esq">
+        <div class="insta-icone" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="#ec6125" stroke="none"/>
+          </svg>
+        </div>
+        <div>
+          <strong class="insta-titulo">Siga a Nódoa Brasil</strong>
+          <span class="insta-sub">Conteúdo diário sobre cultura brasileira</span>
+        </div>
+      </div>
+      <a href="https://instagram.com/nodoabrasil" target="_blank" rel="noopener noreferrer" class="btn-insta">
+        @nodoabrasil
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      </a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Nódoa <span>Brasil</span></div>
+        <p class="footer-desc">Revista digital independente de cultura, música, atualidades e curiosidades brasileiras. Para quem ama ser brasileiro.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre a revista</a></li>
+          <li><a href="equipe.html">Equipe</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <ul>
+          <li><a href="categoria-opiniao.html">Opinião</a></li>
+          <li><a href="categoria-atualidades.html">Atualidades</a></li>
+          <li><a href="categoria-curiosidades.html">Curiosidades</a></li>
+          <li><a href="categoria-musica.html">Música</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nódoa Brasil — Todos os direitos reservados</span>
+      <span>Feito com amor ao Brasil ✦</span>
+    </div>
+  </footer>
+
+  <script>
+    // Modo escuro
+    const btn = document.getElementById('themeBtn');
+    const icon = document.getElementById('themeIcon');
+    const moon = '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+    const sun  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+
+    if (localStorage.getItem('nodoa-theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      icon.innerHTML = sun;
+    }
+
+    btn.addEventListener('click', () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (dark) {
+        document.documentElement.removeAttribute('data-theme');
+        icon.innerHTML = moon;
+        localStorage.setItem('nodoa-theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        icon.innerHTML = sun;
+        localStorage.setItem('nodoa-theme', 'dark');
+      }
+    });
+
+    // Busca
+    document.getElementById('searchInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && e.target.value.trim()) {
+        window.location.href = `busca.html?q=${encodeURIComponent(e.target.value.trim())}`;
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opinião — Nódoa Brasil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <style>
+    .cat-sec { padding: 56px 40px 80px; }
+    .cat-desc { font-size: 16px; opacity: 0.72; max-width: 520px; margin-bottom: 40px; line-height: 1.7; }
+    .cat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--verde); border: 2px solid var(--verde); }
+    .card { background: var(--bg); padding: 26px; display: flex; flex-direction: column; gap: 12px; transition: background 0.2s; }
+    .card:hover { background: var(--card-bg); }
+    .card-img { width: 100%; aspect-ratio: 16/9; background: var(--creme-esc); border: 1.5px solid rgba(48,60,23,0.2); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    [data-theme="dark"] .card-img { border-color: #3a4520; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-img-ph { opacity: 0.18; }
+    .card-img-ph svg { width: 26px; height: 26px; stroke: var(--text); }
+    .card-titulo { font-family: var(--font-title); font-size: 17px; font-weight: 700; line-height: 1.3; }
+    .card-exc { font-size: 13px; opacity: 0.65; line-height: 1.65; }
+    .card-meta { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.38; margin-top: auto; }
+    @media (max-width: 860px) { .cat-sec { padding: 40px 20px 60px; } .cat-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="top-bar">✦ Revista digital de cultura brasileira ✦ Nova matéria toda semana ✦</div>
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-caju.svg" alt="" aria-hidden="true" />
+      <span class="nav-logo-text">Nódoa <span>Brasil</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="categorias.html" class="ativo">Categorias</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="equipe.html">Equipe</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-wrap" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" placeholder="Buscar matérias..." aria-label="Buscar matérias" id="searchInput" />
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Alternar modo claro e escuro">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" width="17" height="17" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="page-hero">
+    <p class="page-hero-label">Categoria</p>
+    <h1 class="page-hero-title">Opinião</h1>
+  </div>
+  <main>
+    <section class="cat-sec" aria-label="Matérias de Opinião">
+      <p class="cat-desc">Ponto de vista, análise e reflexão sobre cultura e sociedade brasileira.</p>
+      <div class="cat-grid">
+        <a href="materia.html" class="card">
+          <div class="card-img" aria-hidden="true"><div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+          <span class="tag tag-op">Opinião</span>
+          <h2 class="card-titulo">Título da matéria — substitua pelo conteúdo real</h2>
+          <p class="card-exc">Breve descrição da matéria. Este é um placeholder que será substituído pelo conteúdo real quando você publicar pelo painel do CMS.</p>
+          <p class="card-meta">Jun 2026 · 8 min</p>
+        </a>
+        <a href="materia.html" class="card">
+          <div class="card-img" aria-hidden="true"><div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+          <span class="tag tag-op">Opinião</span>
+          <h2 class="card-titulo">Título da matéria — substitua pelo conteúdo real</h2>
+          <p class="card-exc">Breve descrição da matéria. Este é um placeholder que será substituído pelo conteúdo real quando você publicar pelo painel do CMS.</p>
+          <p class="card-meta">Mai 2026 · 10 min</p>
+        </a>
+        <a href="materia.html" class="card">
+          <div class="card-img" aria-hidden="true"><div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+          <span class="tag tag-op">Opinião</span>
+          <h2 class="card-titulo">Título da matéria — substitua pelo conteúdo real</h2>
+          <p class="card-exc">Breve descrição da matéria. Este é um placeholder que será substituído pelo conteúdo real quando você publicar pelo painel do CMS.</p>
+          <p class="card-meta">Abr 2026 · 7 min</p>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div><div class="footer-logo">Nódoa <span>Brasil</span></div><p class="footer-desc">Revista digital independente de cultura, música, atualidades e curiosidades brasileiras.</p></div>
+      <div class="footer-col"><h4>Navegação</h4><ul><li><a href="index.html">Início</a></li><li><a href="sobre.html">Sobre</a></li><li><a href="equipe.html">Equipe</a></li><li><a href="contato.html">Contato</a></li></ul></div>
+      <div class="footer-col"><h4>Categorias</h4><ul><li><a href="categoria-opiniao.html">Opinião</a></li><li><a href="categoria-atualidades.html">Atualidades</a></li><li><a href="categoria-curiosidades.html">Curiosidades</a></li><li><a href="categoria-musica.html">Música</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Nódoa Brasil — Todos os direitos reservados</span><span>Feito com amor ao Brasil ✦</span></div>
+  </footer>
+  <script src="base.js"></script>
+</body>
+</html>

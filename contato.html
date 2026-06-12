@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato — Nódoa Brasil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <style>
+    .contato-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid var(--verde);
+      min-height: 480px;
+    }
+    .contato-info {
+      padding: 64px 52px;
+      border-right: 2px solid var(--verde);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+    }
+    .contato-label {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--laranja); margin-bottom: 12px;
+    }
+    .contato-titulo {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1.22;
+      margin-bottom: 16px;
+    }
+    .contato-desc {
+      font-size: 15px; line-height: 1.8; opacity: 0.72;
+    }
+    .contato-itens {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contato-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .contato-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--laranja);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contato-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; }
+    .contato-item-texto {}
+    .contato-item-label {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; margin-bottom: 3px;
+    }
+    .contato-item-valor {
+      font-size: 15px; font-weight: 600;
+    }
+    .contato-item-valor a { transition: color 0.2s; }
+    .contato-item-valor a:hover { color: var(--laranja); }
+
+    /* Redes sociais */
+    .redes-sec {
+      padding: 64px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+    .redes-titulo {
+      font-family: var(--font-display);
+      font-size: 24px;
+    }
+    .redes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .rede-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border: 1.5px solid var(--verde);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .rede-item:hover { background: var(--verde); color: var(--creme); border-color: var(--verde); }
+    [data-theme="dark"] .rede-item { border-color: rgba(237,219,186,0.3); }
+    [data-theme="dark"] .rede-item:hover { background: var(--creme); color: var(--verde); }
+    .rede-icon {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .rede-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; }
+    .rede-info { display: flex; flex-direction: column; }
+    .rede-nome { font-size: 13px; font-weight: 600; letter-spacing: 1px; }
+    .rede-handle { font-size: 12px; opacity: 0.55; }
+    .rede-seta { margin-left: auto; font-size: 18px; opacity: 0.4; }
+
+    @media (max-width: 860px) {
+      .contato-wrap { grid-template-columns: 1fr; }
+      .contato-info { border-right: none; border-bottom: 2px solid var(--verde); padding: 40px 20px; }
+      .redes-sec { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">✦ Revista digital de cultura brasileira ✦ Nova matéria toda semana ✦</div>
+
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-caju.svg" alt="" aria-hidden="true" />
+      <span class="nav-logo-text">Nódoa <span>Brasil</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="categorias.html">Categorias</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="equipe.html">Equipe</a></li>
+      <li><a href="contato.html" class="ativo">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-wrap" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" placeholder="Buscar matérias..." aria-label="Buscar matérias" id="searchInput" />
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Alternar modo claro e escuro">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" width="17" height="17" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <p class="page-hero-label">Fale com a gente</p>
+    <h1 class="page-hero-title">Contato</h1>
+  </div>
+
+  <main>
+    <section class="contato-wrap" aria-label="Informações de contato">
+
+      <div class="contato-info">
+        <div>
+          <p class="contato-label">Como nos encontrar</p>
+          <h2 class="contato-titulo">Vamos conversar?</h2>
+          <p class="contato-desc">Seja para sugestão de pauta, colaboração, dúvida ou só para dizer que gostou — estamos aqui. A Nódoa Brasil é feita de pessoas para pessoas.</p>
+        </div>
+
+        <div class="contato-itens">
+          <div class="contato-item">
+            <div class="contato-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contato-item-texto">
+              <p class="contato-item-label">E-mail</p>
+              <p class="contato-item-valor">
+                <!-- Substitua pelo e-mail real -->
+                <a href="mailto:contato@nodoabrasil.com.br">contato@nodoabrasil.com.br</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="contato-item">
+            <div class="contato-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+            </div>
+            <div class="contato-item-texto">
+              <p class="contato-item-label">Instagram</p>
+              <p class="contato-item-valor">
+                <a href="https://instagram.com/nodoabrasil" target="_blank" rel="noopener noreferrer">@nodoabrasil</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="redes-sec" aria-label="Nossas redes sociais">
+        <h2 class="redes-titulo">Nossas redes</h2>
+        <div class="redes-grid">
+
+          <a href="https://instagram.com/nodoabrasil" target="_blank" rel="noopener noreferrer" class="rede-item" aria-label="Instagram da Nódoa Brasil">
+            <div class="rede-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <div class="rede-info">
+              <span class="rede-nome">Instagram</span>
+              <span class="rede-handle">@nodoabrasil</span>
+            </div>
+            <span class="rede-seta" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- Adicione outras redes quando tiver -->
+          <!--
+          <a href="https://twitter.com/nodoabrasil" target="_blank" rel="noopener noreferrer" class="rede-item">
+            <div class="rede-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.258 5.626zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </div>
+            <div class="rede-info">
+              <span class="rede-nome">X (Twitter)</span>
+              <span class="rede-handle">@nodoabrasil</span>
+            </div>
+            <span class="rede-seta">↗</span>
+          </a>
+          -->
+
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Nódoa <span>Brasil</span></div>
+        <p class="footer-desc">Revista digital independente de cultura, música, atualidades e curiosidades brasileiras.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="equipe.html">Equipe</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <ul>
+          <li><a href="categoria-opiniao.html">Opinião</a></li>
+          <li><a href="categoria-atualidades.html">Atualidades</a></li>
+          <li><a href="categoria-curiosidades.html">Curiosidades</a></li>
+          <li><a href="categoria-musica.html">Música</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nódoa Brasil — Todos os direitos reservados</span>
+      <span>Feito com amor ao Brasil ✦</span>
+    </div>
+  </footer>
+
+  <script src="base.js"></script>
+</body>
+</html>

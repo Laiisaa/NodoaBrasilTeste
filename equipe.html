@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipe — Nódoa Brasil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <style>
+    .equipe-sec {
+      padding: 60px 40px 80px;
+    }
+    .equipe-intro {
+      max-width: 560px;
+      margin-bottom: 52px;
+    }
+    .equipe-intro p {
+      font-size: 16px;
+      line-height: 1.8;
+      opacity: 0.75;
+    }
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--verde);
+      border: 2px solid var(--verde);
+    }
+    .membro-card {
+      background: var(--bg);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: background 0.2s;
+    }
+    .membro-card:hover { background: var(--card-bg); }
+    .membro-foto {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--creme-esc);
+      border: 2px solid var(--verde);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .membro-foto { border-color: rgba(237,219,186,0.3); }
+    .membro-foto img { width: 100%; height: 100%; object-fit: cover; }
+    .membro-foto-ph svg { width: 36px; height: 36px; stroke: var(--text); opacity: 0.3; }
+    .membro-nome {
+      font-family: var(--font-title);
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .membro-cargo {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--laranja);
+      color: #fff;
+      padding: 3px 10px;
+      align-self: flex-start;
+    }
+    .membro-bio {
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: 0.7;
+    }
+
+    /* Faça parte */
+    .faca-parte {
+      margin-top: 64px;
+      padding: 48px;
+      background: var(--verde);
+      color: var(--creme);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .faca-parte-texto h3 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    .faca-parte-texto p {
+      font-size: 14px;
+      opacity: 0.7;
+      max-width: 440px;
+      line-height: 1.7;
+    }
+    .btn-contato {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--laranja);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .btn-contato:hover { background: var(--vinho); }
+
+    @media (max-width: 860px) {
+      .equipe-sec { padding: 40px 20px 60px; }
+      .equipe-grid { grid-template-columns: 1fr; }
+      .faca-parte { flex-direction: column; padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">✦ Revista digital de cultura brasileira ✦ Nova matéria toda semana ✦</div>
+
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-caju.svg" alt="" aria-hidden="true" />
+      <span class="nav-logo-text">Nódoa <span>Brasil</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="categorias.html">Categorias</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="equipe.html" class="ativo">Equipe</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-wrap" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" placeholder="Buscar matérias..." aria-label="Buscar matérias" id="searchInput" />
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Alternar modo claro e escuro">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" width="17" height="17" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <p class="page-hero-label">As pessoas</p>
+    <h1 class="page-hero-title">Quem faz a<br/>Nódoa Brasil</h1>
+  </div>
+
+  <main>
+    <section class="equipe-sec" aria-label="Equipe da Nódoa Brasil">
+
+      <div class="equipe-intro">
+        <p>A Nódoa Brasil é feita por pessoas apaixonadas por cultura brasileira — jornalistas, escritores, músicos, pesquisadores e entusiastas que acreditam no poder das histórias bem contadas.</p>
+      </div>
+
+      <div class="equipe-grid">
+
+        <!-- Membro 1 -->
+        <div class="membro-card">
+          <div class="membro-foto" aria-hidden="true">
+            <!--
+              Para adicionar foto:
+              <img src="equipe/nome.jpg" alt="Foto de [Nome]" />
+            -->
+            <div class="membro-foto-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h2 class="membro-nome">Nome da pessoa</h2>
+          <span class="membro-cargo">Editora-chefe</span>
+          <p class="membro-bio">Substitua este texto com a bio real do membro da equipe. Conte um pouco sobre a trajetória, interesses e o que essa pessoa traz para a Nódoa Brasil.</p>
+        </div>
+
+        <!-- Membro 2 -->
+        <div class="membro-card">
+          <div class="membro-foto" aria-hidden="true">
+            <div class="membro-foto-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h2 class="membro-nome">Nome da pessoa</h2>
+          <span class="membro-cargo">Redação</span>
+          <p class="membro-bio">Substitua este texto com a bio real do membro da equipe. Conte um pouco sobre a trajetória, interesses e o que essa pessoa traz para a Nódoa Brasil.</p>
+        </div>
+
+        <!-- Membro 3 -->
+        <div class="membro-card">
+          <div class="membro-foto" aria-hidden="true">
+            <div class="membro-foto-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h2 class="membro-nome">Nome da pessoa</h2>
+          <span class="membro-cargo">Design</span>
+          <p class="membro-bio">Substitua este texto com a bio real do membro da equipe. Conte um pouco sobre a trajetória, interesses e o que essa pessoa traz para a Nódoa Brasil.</p>
+        </div>
+
+        <!-- Membro 4 -->
+        <div class="membro-card">
+          <div class="membro-foto" aria-hidden="true">
+            <div class="membro-foto-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h2 class="membro-nome">Nome da pessoa</h2>
+          <span class="membro-cargo">Colaboradora</span>
+          <p class="membro-bio">Substitua este texto com a bio real do membro da equipe. Conte um pouco sobre a trajetória, interesses e o que essa pessoa traz para a Nódoa Brasil.</p>
+        </div>
+
+        <!-- Membro 5 -->
+        <div class="membro-card">
+          <div class="membro-foto" aria-hidden="true">
+            <div class="membro-foto-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h2 class="membro-nome">Nome da pessoa</h2>
+          <span class="membro-cargo">Colaborador</span>
+          <p class="membro-bio">Substitua este texto com a bio real do membro da equipe. Conte um pouco sobre a trajetória, interesses e o que essa pessoa traz para a Nódoa Brasil.</p>
+        </div>
+
+        <!-- Membro 6 -->
+        <div class="membro-card">
+          <div class="membro-foto" aria-hidden="true">
+            <div class="membro-foto-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <h2 class="membro-nome">Nome da pessoa</h2>
+          <span class="membro-cargo">Colaboradora</span>
+          <p class="membro-bio">Substitua este texto com a bio real do membro da equipe. Conte um pouco sobre a trajetória, interesses e o que essa pessoa traz para a Nódoa Brasil.</p>
+        </div>
+
+      </div>
+
+      <div class="faca-parte" aria-label="Faça parte da equipe">
+        <div class="faca-parte-texto">
+          <h3>Quer fazer parte?</h3>
+          <p>A Nódoa Brasil está sempre aberta a novas vozes. Se você tem algo a dizer sobre cultura brasileira e quer escrever conosco, entre em contato.</p>
+        </div>
+        <a href="contato.html" class="btn-contato">Fale conosco →</a>
+      </div>
+
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Nódoa <span>Brasil</span></div>
+        <p class="footer-desc">Revista digital independente de cultura, música, atualidades e curiosidades brasileiras.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="equipe.html">Equipe</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <ul>
+          <li><a href="categoria-opiniao.html">Opinião</a></li>
+          <li><a href="categoria-atualidades.html">Atualidades</a></li>
+          <li><a href="categoria-curiosidades.html">Curiosidades</a></li>
+          <li><a href="categoria-musica.html">Música</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nódoa Brasil — Todos os direitos reservados</span>
+      <span>Feito com amor ao Brasil ✦</span>
+    </div>
+  </footer>
+
+  <script src="base.js"></script>
+</body>
+</html>

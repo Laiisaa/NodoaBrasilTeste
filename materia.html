@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matéria — Nódoa Brasil</title>
+  <meta name="description" content="Leia a matéria completa na Nódoa Brasil." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <style>
+    .materia-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    .materia-tag-data {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .materia-data {
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+    .materia-titulo {
+      font-family: var(--font-title);
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 20px;
+    }
+    .materia-subtitulo {
+      font-size: 18px;
+      font-style: italic;
+      opacity: 0.72;
+      margin-bottom: 28px;
+      line-height: 1.6;
+      border-left: 3px solid var(--laranja);
+      padding-left: 16px;
+    }
+    .materia-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 0;
+      border-top: 1px solid rgba(48,60,23,0.15);
+      border-bottom: 1px solid rgba(48,60,23,0.15);
+      margin-bottom: 36px;
+    }
+    [data-theme="dark"] .materia-meta { border-color: rgba(237,219,186,0.15); }
+    .meta-autor {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .meta-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--creme-esc);
+      border: 1.5px solid var(--verde);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .meta-avatar { border-color: rgba(237,219,186,0.3); }
+    .meta-avatar svg { width: 18px; height: 18px; stroke: var(--text); }
+    .meta-nome { font-size: 13px; font-weight: 600; }
+    .meta-info { font-size: 11px; opacity: 0.5; letter-spacing: 1px; }
+    .meta-tempo { font-size: 12px; opacity: 0.45; letter-spacing: 1px; text-transform: uppercase; margin-left: auto; }
+
+    /* Imagem de capa */
+    .materia-capa {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--verde);
+      margin-bottom: 36px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .materia-capa img { width: 100%; height: 100%; object-fit: cover; }
+    .capa-ph { display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--creme); opacity: 0.2; font-size: 12px; letter-spacing: 1px; }
+    .capa-ph svg { width: 44px; height: 44px; stroke: currentColor; }
+
+    /* Corpo do texto */
+    .materia-corpo {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--text);
+    }
+    .materia-corpo p { margin-bottom: 24px; }
+    .materia-corpo h2 {
+      font-family: var(--font-title);
+      font-size: 24px;
+      font-weight: 700;
+      margin: 40px 0 16px;
+      line-height: 1.3;
+    }
+    .materia-corpo h3 {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 700;
+      margin: 32px 0 12px;
+    }
+    .materia-corpo blockquote {
+      border-left: 3px solid var(--laranja);
+      padding: 4px 0 4px 20px;
+      margin: 32px 0;
+      font-style: italic;
+      font-size: 19px;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+    /* Mídia inline opcional */
+    .materia-corpo figure {
+      margin: 36px 0;
+    }
+    .materia-corpo figure img {
+      width: 100%;
+    }
+    .materia-corpo figcaption {
+      font-size: 12px;
+      opacity: 0.5;
+      text-align: center;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    .materia-corpo .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 36px 0;
+    }
+    .materia-corpo .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .materia-corpo audio {
+      width: 100%;
+      margin: 24px 0;
+    }
+
+    /* Compartilhar */
+    .compartilhar {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 2px solid var(--verde);
+    }
+    .compartilhar-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--laranja);
+      margin-bottom: 16px;
+    }
+    .compartilhar-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1.5px solid currentColor;
+      cursor: pointer;
+      background: none;
+      font-family: var(--font-body);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-share svg { width: 16px; height: 16px; fill: none; stroke: currentColor; }
+    .btn-share.whatsapp { color: #25D366; }
+    .btn-share.whatsapp:hover { background: #25D366; color: #fff; border-color: #25D366; }
+    .btn-share.instagram { color: var(--roxo); }
+    .btn-share.instagram:hover { background: var(--roxo); color: #fff; }
+    .btn-share.facebook { color: #1877F2; }
+    .btn-share.facebook:hover { background: #1877F2; color: #fff; border-color: #1877F2; }
+    .btn-share.twitter { color: var(--text); }
+    .btn-share.twitter:hover { background: var(--text); color: var(--bg); }
+    .btn-share.copiar { color: var(--laranja); }
+    .btn-share.copiar:hover { background: var(--laranja); color: #fff; }
+    .copied-msg { font-size: 12px; color: var(--laranja); margin-top: 8px; display: none; }
+    .copied-msg.show { display: block; }
+
+    @media (max-width: 860px) {
+      .materia-wrap { padding: 36px 20px 60px; }
+      .materia-corpo { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">✦ Revista digital de cultura brasileira ✦ Nova matéria toda semana ✦</div>
+
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-caju.svg" alt="" aria-hidden="true" />
+      <span class="nav-logo-text">Nódoa <span>Brasil</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="categorias.html">Categorias</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="equipe.html">Equipe</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-wrap" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" placeholder="Buscar matérias..." aria-label="Buscar matérias" id="searchInput" />
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Alternar modo claro e escuro">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" width="17" height="17" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <article class="materia-wrap">
+
+      <div class="materia-tag-data">
+        <span class="tag tag-at">Atualidades</span>
+        <span class="materia-data">8 de junho de 2026</span>
+      </div>
+
+      <h1 class="materia-titulo">A mancha que ficou: memória, corpo e pertencimento no Brasil contemporâneo</h1>
+
+      <p class="materia-subtitulo">Uma investigação sobre o que carregamos na pele e no imaginário — e por que algumas marcas se recusam a desaparecer.</p>
+
+      <div class="materia-meta">
+        <div class="meta-autor">
+          <div class="meta-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div>
+            <div class="meta-nome">Editoria Nódoa Brasil</div>
+            <div class="meta-info">14 min de leitura</div>
+          </div>
+        </div>
+        <span class="meta-tempo">Jun 2026</span>
+      </div>
+
+      <!-- IMAGEM DE CAPA (opcional) -->
+      <div class="materia-capa" aria-label="Imagem de capa da matéria">
+        <!--
+          Para adicionar imagem de capa:
+          <img src="imagens/nome-da-imagem.jpg" alt="Descrição da imagem" />
+        -->
+        <div class="capa-ph" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Imagem de capa</span>
+        </div>
+      </div>
+
+      <!-- CORPO DA MATÉRIA -->
+      <div class="materia-corpo">
+
+        <p>Existe uma palavra em português que carrega mais peso do que parece: <em>nódoa</em>. Sinal deixado por um corpo ou substância que suja. Mancha. Algo que resiste à limpeza, que se recusa a desaparecer como se tivesse decidido, por conta própria, que vai ficar.</p>
+
+        <p>É com essa imagem que começa nossa investigação sobre memória, corpo e pertencimento no Brasil de hoje. O que ficou marcado em nós? O que carregamos sem perceber? E por que algumas dessas marcas — culturais, históricas, afetivas — têm a persistência do líquido do caju na camisa branca?</p>
+
+        <h2>O corpo como arquivo</h2>
+
+        <p>A antropóloga Lília Schwarcz gosta de dizer que o Brasil tem dificuldade de lidar com seu passado porque insiste em tratá-lo como passado. Mas o corpo — individual e coletivo — não esquece com tanta facilidade.</p>
+
+        <blockquote>
+          "A memória não é o que aconteceu. É o que ficou de quem aconteceu."
+        </blockquote>
+
+        <p>Neste sentido, pensar o pertencimento no Brasil exige olhar para o que está inscrito nos corpos: nos gestos, nos gostos, nas formas de ocupar o espaço, nos ritmos que emergem mesmo quando não foram ensinados formalmente.</p>
+
+        <!--
+          EXEMPLO DE IMAGEM INLINE (adicione quando tiver):
+          <figure>
+            <img src="imagens/foto-1.jpg" alt="Descrição detalhada da imagem" />
+            <figcaption>Legenda da imagem. Crédito: Nome do fotógrafo</figcaption>
+          </figure>
+        -->
+
+        <h2>Resistência e permanência</h2>
+
+        <p>Há algo de subversivo na ideia de mancha. Ela não pede licença. Não respeita a limpeza que alguém tentou impor. E é exatamente nessa teimosia que reside parte do que chamamos de identidade cultural brasileira.</p>
+
+        <p>As manifestações culturais que sobreviveram — o candomblé, o frevo, a capoeira, o repente — sobreviveram justamente porque se recusaram a ser apagadas. Mancharam o tecido social de formas que nenhuma lavagem conseguiu desfazer completamente.</p>
+
+        <!--
+          EXEMPLO DE VÍDEO INLINE (adicione quando tiver):
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/SEU_ID_AQUI" title="Título do vídeo" allowfullscreen></iframe>
+          </div>
+        -->
+
+        <!--
+          EXEMPLO DE ÁUDIO INLINE (adicione quando tiver):
+          <audio controls>
+            <source src="audio/nome-do-audio.mp3" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+          </audio>
+        -->
+
+        <h2>Pertencer é também ser marcado</h2>
+
+        <p>Pertencer a um lugar, a uma cultura, a um povo, implica aceitar as marcas que esse pertencimento deixa. Não como cicatrizes de algo que foi sofrido, mas como sinais de algo que foi vivido — que continua sendo vivido.</p>
+
+        <p>É isso que a Nódoa Brasil quer explorar: as marcas que fazem de nós o que somos. As manchas que não saem, porque no fundo, não queremos que saiam.</p>
+
+      </div>
+
+      <!-- COMPARTILHAR -->
+      <div class="compartilhar">
+        <p class="compartilhar-label">Compartilhar esta matéria</p>
+        <div class="compartilhar-btns">
+          <a class="btn-share whatsapp" id="shareWhatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.529 5.845L.057 23.572l5.865-1.538A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.791 9.791 0 01-5.002-1.373l-.359-.212-3.482.913.929-3.391-.233-.371A9.787 9.787 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="btn-share instagram" href="https://www.instagram.com/nodoabrasil" target="_blank" rel="noopener noreferrer" aria-label="Seguir no Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Instagram
+          </a>
+          <a class="btn-share facebook" id="shareFacebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a class="btn-share twitter" id="shareTwitter" href="#" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no X (Twitter)">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.258 5.626zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X (Twitter)
+          </a>
+          <button class="btn-share copiar" id="btnCopiar" aria-label="Copiar link da matéria">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            Copiar link
+          </button>
+        </div>
+        <p class="copied-msg" id="copiedMsg" aria-live="polite">✓ Link copiado!</p>
+      </div>
+
+    </article>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Nódoa <span>Brasil</span></div>
+        <p class="footer-desc">Revista digital independente de cultura, música, atualidades e curiosidades brasileiras.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="equipe.html">Equipe</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <ul>
+          <li><a href="categoria-opiniao.html">Opinião</a></li>
+          <li><a href="categoria-atualidades.html">Atualidades</a></li>
+          <li><a href="categoria-curiosidades.html">Curiosidades</a></li>
+          <li><a href="categoria-musica.html">Música</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nódoa Brasil — Todos os direitos reservados</span>
+      <span>Feito com amor ao Brasil ✦</span>
+    </div>
+  </footer>
+
+  <script src="base.js"></script>
+  <script>
+    const url = window.location.href;
+    const titulo = document.querySelector('.materia-titulo')?.textContent || 'Nódoa Brasil';
+
+    document.getElementById('shareWhatsapp').href =
+      `https://wa.me/?text=${encodeURIComponent(titulo + ' — ' + url)}`;
+    document.getElementById('shareFacebook').href =
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    document.getElementById('shareTwitter').href =
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(titulo)}&url=${encodeURIComponent(url)}`;
+
+    document.getElementById('btnCopiar').addEventListener('click', () => {
+      navigator.clipboard.writeText(url).then(() => {
+        const msg = document.getElementById('copiedMsg');
+        msg.classList.add('show');
+        setTimeout(() => msg.classList.remove('show'), 2500);
+      });
+    });
+  </script>
+</body>
+</html>
